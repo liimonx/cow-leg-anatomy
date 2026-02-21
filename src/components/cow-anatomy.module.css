@@ -1,0 +1,164 @@
+.root {
+  display: block;
+  height: auto;
+  width: 100%;
+
+  /* Modern Glassmorphic Dark Aesthetics */
+  --anatomy-fill-default: rgba(255, 255, 255, 0.05);
+  --anatomy-fill-active: rgba(99, 102, 241, 0.5);
+  --anatomy-fill-hover: rgba(255, 255, 255, 0.12);
+  --anatomy-stroke: rgba(255, 255, 255, 0.15);
+
+  --anatomy-indicator-fill: rgba(99, 102, 241, 0.9);
+  --anatomy-indicator-text: #ffffff;
+
+  --anatomy-hitbox-color: rgba(99, 102, 241, 0.5);
+  --anatomy-hitbox-width: 16;
+  --anatomy-hitbox-opacity: 0;
+
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+}
+
+.showHitboxes {
+  --anatomy-hitbox-opacity: 0.25;
+}
+
+.section {
+  cursor: pointer;
+  --section-fill: var(--anatomy-fill-default);
+  --section-fill-hover: var(--anatomy-fill-hover);
+  --section-fill-active: var(--anatomy-fill-active);
+  --section-stroke: var(--anatomy-stroke);
+  --section-indicator-fill: var(--anatomy-indicator-fill);
+  --section-indicator-text: var(--anatomy-indicator-text);
+}
+
+.sectionActive .visual {
+  fill: var(--section-fill-active);
+  stroke: rgba(129, 140, 248, 0.8);
+  filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.4));
+}
+
+.visualHidden .visual {
+  fill: transparent;
+  stroke: transparent;
+}
+
+.hitbox {
+  fill: var(--anatomy-hitbox-color);
+  opacity: var(--anatomy-hitbox-opacity);
+  pointer-events: all;
+  stroke: var(--anatomy-hitbox-color);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: var(--anatomy-hitbox-width);
+  transition: opacity 0.3s ease;
+}
+
+.visual {
+  fill: var(--section-fill);
+  pointer-events: none;
+  stroke: var(--section-stroke);
+  stroke-linejoin: round;
+  stroke-width: 2.2;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(4px);
+}
+
+.section:hover .visual {
+  fill: var(--section-fill-hover);
+  stroke: rgba(255, 255, 255, 0.4);
+}
+
+.indicator {
+  fill: var(--section-indicator-fill);
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+.section:hover .indicator {
+  fill: rgba(129, 140, 248, 1);
+  transform: scale(1.1);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.sectionActive .indicator {
+  fill: rgba(79, 70, 229, 1);
+  transform: scale(1.15);
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.8));
+}
+
+.indicatorText {
+  dominant-baseline: middle;
+  fill: var(--section-indicator-text);
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  pointer-events: none;
+  text-anchor: middle;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.indicatorTextSmall {
+  font-size: 22px;
+}
+
+.outline {
+  fill: none;
+  pointer-events: none;
+  stroke: rgba(255, 255, 255, 0.25);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+
+.divider {
+  fill: none;
+  pointer-events: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.2;
+}
+
+.dashedDivider {
+  fill: none;
+  pointer-events: none;
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-dasharray: 8 6;
+  stroke-linecap: round;
+  stroke-width: 2.2;
+}
+
+.labelBadge {
+  fill: rgba(30, 41, 59, 0.8);
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 2;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.labelText {
+  dominant-baseline: middle;
+  fill: #f8fafc;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  pointer-events: none;
+  text-anchor: middle;
+  letter-spacing: 1px;
+}

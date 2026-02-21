@@ -1,0 +1,47 @@
+:root {
+  --background: #0f111a;
+  --foreground: #f8fafc;
+
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /* Premium dark background with a very subtle radial gradient */
+  background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f111a 60%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
