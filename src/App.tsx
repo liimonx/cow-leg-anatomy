@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 import {
   CowHoofFootSvg,
@@ -21,6 +21,12 @@ type ClickEvent = {
 export default function App() {
   const [showHitboxes, setShowHitboxes] = useState(false);
   const [styleTestEnabled, setStyleTestEnabled] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   const [lastClick, setLastClick] = useState<ClickEvent | null>(null);
 
   const [activeHoofFootSectionIds, setActiveHoofFootSectionIds] = useState<
@@ -67,6 +73,13 @@ export default function App() {
             onClick={() => setShowHitboxes((value) => !value)}
           >
             {showHitboxes ? "Hide Hitboxes" : "Show Hitboxes"}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
+          >
+            Toggle {theme === "dark" ? "Light" : "Dark"} Mode
           </button>
           <button
             type="button"

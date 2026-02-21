@@ -19,6 +19,22 @@
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
 }
 
+:global([data-theme="light"]) .root {
+  --anatomy-fill-default: #e7d8a9;
+  --anatomy-fill-active: #f0d58a;
+  --anatomy-fill-hover: #f1dfab;
+  --anatomy-stroke: #a3937f;
+
+  --anatomy-indicator-fill: #5551e3;
+  --anatomy-indicator-text: #ffffff;
+
+  --anatomy-hitbox-color: #2773ff;
+  --anatomy-hitbox-width: 16;
+  --anatomy-hitbox-opacity: 0;
+
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+}
+
 .showHitboxes {
   --anatomy-hitbox-opacity: 0.25;
 }
@@ -35,8 +51,15 @@
 
 .sectionActive .visual {
   fill: var(--section-fill-active);
-  stroke: rgba(129, 140, 248, 0.8);
-  filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.4));
+  stroke: var(--active-visual-stroke, rgba(129, 140, 248, 0.8));
+  filter: drop-shadow(
+    0 0 12px var(--active-visual-shadow, rgba(99, 102, 241, 0.4))
+  );
+}
+
+:global([data-theme="light"]) .sectionActive .visual {
+  --active-visual-stroke: rgba(79, 70, 229, 0.6);
+  --active-visual-shadow: rgba(99, 102, 241, 0.2);
 }
 
 .visualHidden .visual {
@@ -67,7 +90,11 @@
 
 .section:hover .visual {
   fill: var(--section-fill-hover);
-  stroke: rgba(255, 255, 255, 0.4);
+  stroke: var(--hover-visual-stroke, rgba(255, 255, 255, 0.4));
+}
+
+:global([data-theme="light"]) .section:hover .visual {
+  --hover-visual-stroke: rgba(0, 0, 0, 0.2);
 }
 
 .indicator {
@@ -78,18 +105,29 @@
 }
 
 .section:hover .indicator {
-  fill: rgba(129, 140, 248, 1);
+  fill: var(--hover-indicator-fill, rgba(129, 140, 248, 1));
   transform: scale(1.1);
   transform-box: fill-box;
   transform-origin: center;
 }
 
+:global([data-theme="light"]) .section:hover .indicator {
+  --hover-indicator-fill: rgba(79, 70, 229, 1);
+}
+
 .sectionActive .indicator {
-  fill: rgba(79, 70, 229, 1);
+  fill: var(--active-indicator-fill, rgba(79, 70, 229, 1));
   transform: scale(1.15);
   transform-box: fill-box;
   transform-origin: center;
-  filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.8));
+  filter: drop-shadow(
+    0 0 12px var(--active-indicator-shadow, rgba(99, 102, 241, 0.8))
+  );
+}
+
+:global([data-theme="light"]) .sectionActive .indicator {
+  --active-indicator-fill: rgba(67, 56, 202, 1);
+  --active-indicator-shadow: rgba(99, 102, 241, 0.4);
 }
 
 .indicatorText {
@@ -115,42 +153,59 @@
 .outline {
   fill: none;
   pointer-events: none;
-  stroke: rgba(255, 255, 255, 0.25);
+  stroke: var(--outline-stroke, rgba(255, 255, 255, 0.25));
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2.5;
 }
 
+:global([data-theme="light"]) .outline {
+  --outline-stroke: rgba(0, 0, 0, 0.15);
+}
+
 .divider {
   fill: none;
   pointer-events: none;
-  stroke: rgba(255, 255, 255, 0.2);
+  stroke: var(--divider-stroke, rgba(255, 255, 255, 0.2));
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2.2;
 }
 
+:global([data-theme="light"]) .divider {
+  --divider-stroke: rgba(0, 0, 0, 0.1);
+}
+
 .dashedDivider {
   fill: none;
   pointer-events: none;
-  stroke: rgba(255, 255, 255, 0.15);
+  stroke: var(--dashed-divider-stroke, rgba(255, 255, 255, 0.15));
   stroke-dasharray: 8 6;
   stroke-linecap: round;
   stroke-width: 2.2;
 }
 
+:global([data-theme="light"]) .dashedDivider {
+  --dashed-divider-stroke: rgba(0, 0, 0, 0.08);
+}
+
 .labelBadge {
-  fill: rgba(30, 41, 59, 0.8);
-  stroke: rgba(255, 255, 255, 0.1);
+  fill: var(--badge-bg, rgba(30, 41, 59, 0.8));
+  stroke: var(--badge-border, rgba(255, 255, 255, 0.1));
   stroke-width: 2;
   pointer-events: none;
   backdrop-filter: blur(8px);
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
 }
 
+:global([data-theme="light"]) .labelBadge {
+  --badge-bg: rgba(255, 255, 255, 0.9);
+  --badge-border: rgba(0, 0, 0, 0.1);
+}
+
 .labelText {
   dominant-baseline: middle;
-  fill: #f8fafc;
+  fill: var(--badge-text, #f8fafc);
   font-family:
     "Inter",
     system-ui,
@@ -161,4 +216,8 @@
   pointer-events: none;
   text-anchor: middle;
   letter-spacing: 1px;
+}
+
+:global([data-theme="light"]) .labelText {
+  --badge-text: #0f111a;
 }

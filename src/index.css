@@ -1,6 +1,8 @@
 :root {
   --background: #0f111a;
   --foreground: #f8fafc;
+  --bg-gradient-start: #1e293b;
+  --bg-gradient-end: #0f111a;
 
   font-family:
     "Inter",
@@ -24,6 +26,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+:root[data-theme="light"] {
+  --background: #f8fafc;
+  --foreground: #0f111a;
+  --bg-gradient-start: #e2e8f0;
+  --bg-gradient-end: #f8fafc;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -40,8 +49,14 @@ body,
 body {
   background: var(--background);
   color: var(--foreground);
-  /* Premium dark background with a very subtle radial gradient */
-  background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f111a 60%);
+  background-image: radial-gradient(
+    circle at 50% 0%,
+    var(--bg-gradient-start) 0%,
+    var(--bg-gradient-end) 60%
+  );
   background-attachment: fixed;
   background-repeat: no-repeat;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
