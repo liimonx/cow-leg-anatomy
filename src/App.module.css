@@ -140,9 +140,9 @@
 
 .controls {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-wrap: wrap;
   gap: 16px;
+  align-content: flex-start;
 }
 
 .controls button {
@@ -156,10 +156,13 @@
   font-size: 15px;
   padding: 14px 20px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  text-align: left;
+  text-align: center;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 8px;
+  flex: 1 1 calc(50% - 8px);
+  min-width: 160px;
 }
 
 .controls button::after {

@@ -39,6 +39,10 @@
   --anatomy-hitbox-opacity: 0.25;
 }
 
+:global([data-theme="light"]) .showHitboxes {
+  --anatomy-hitbox-opacity: 0.5;
+}
+
 .section {
   cursor: pointer;
   --section-fill: var(--anatomy-fill-default);
