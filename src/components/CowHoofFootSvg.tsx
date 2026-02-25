@@ -53,6 +53,7 @@ type SectionDef = {
   id: HoofFootSectionId;
   number: number;
   d: string;
+  hitboxD?: string;
   cx: number;
   cy: number;
   textClassName?: string;
@@ -132,6 +133,7 @@ const SECTIONS: SectionDef[] = [
     id: "hoof-foot-mid-10",
     number: 10,
     d: circlePath(152.373, 297.073, 30),
+    hitboxD: circlePath(152.373, 297.073, 50),
     cx: 152.373,
     cy: 297.073,
     textClassName: styles.indicatorTextSmall,
@@ -141,6 +143,7 @@ const SECTIONS: SectionDef[] = [
     id: "hoof-foot-mid-0",
     number: 0,
     d: circlePath(323.382, 297.073, 30),
+    hitboxD: circlePath(323.382, 297.073, 50),
     cx: 323.382,
     cy: 297.073,
     hideVisual: true,
@@ -149,6 +152,7 @@ const SECTIONS: SectionDef[] = [
     id: "hoof-foot-mid-13",
     number: 13,
     d: circlePath(536.047, 297.073, 30),
+    hitboxD: circlePath(536.047, 297.073, 50),
     cx: 536.047,
     cy: 297.073,
     textClassName: styles.indicatorTextSmall,
@@ -210,19 +214,33 @@ export function CowHoofFootSvg({
   showHitboxes = false,
   ...svgProps
 }: CowHoofFootSvgProps) {
-  const handleSectionClick = (sectionId: HoofFootSectionId, sectionNumber: number) => {
+  const handleSectionClick = (
+    sectionId: HoofFootSectionId,
+    sectionNumber: number,
+  ) => {
     onSectionClick?.({ sectionId, sectionNumber });
   };
 
   return (
     <svg
       {...svgProps}
-      className={cx(styles.root, showHitboxes && styles.showHitboxes, className)}
+      className={cx(
+        styles.root,
+        showHitboxes && styles.showHitboxes,
+        className,
+      )}
       viewBox="0 0 680 597"
       role="img"
       aria-label="Interactive cow hoof front anatomy"
     >
-      <rect className={styles.labelBadge} x="532.758" y="30.694" width="128.467" height="62.162" rx="4.385" />
+      <rect
+        className={styles.labelBadge}
+        x="532.758"
+        y="30.694"
+        width="128.467"
+        height="62.162"
+        rx="4.385"
+      />
       <text className={styles.labelText} x="596.992" y="61.775">
         A
       </text>
@@ -240,13 +258,18 @@ export function CowHoofFootSvg({
               styles.section,
               isActive && styles.sectionActive,
               section.hideVisual && styles.visualHidden,
-              sectionClassNames?.[section.id]
+              sectionClassNames?.[section.id],
             )}
             onClick={() => handleSectionClick(section.id, section.number)}
           >
-            <path className={styles.hitbox} d={section.d} />
+            <path className={styles.hitbox} d={section.hitboxD ?? section.d} />
             <path className={styles.visual} d={section.d} />
-            <circle className={styles.indicator} cx={section.cx} cy={section.cy} r="18.636" />
+            <circle
+              className={styles.indicator}
+              cx={section.cx}
+              cy={section.cy}
+              r="18.636"
+            />
             <text
               className={cx(styles.indicatorText, section.textClassName)}
               x={section.cx}

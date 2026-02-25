@@ -39,6 +39,7 @@ type SectionDef = {
   id: LegSectionId;
   number: number;
   d: string;
+  hitboxD?: string;
   cx: number;
   cy: number;
 };
@@ -60,12 +61,6 @@ const RIGHT_OUTLINE_PATHS = [
   "M550.459 464.946L526.68 484.761C531.524 486.963 544.646 491.367 558.385 491.367C572.123 491.367 581.723 484.321 584.805 480.798C582.604 480.358 576.615 478.949 570.274 476.835C563.933 474.721 554.422 468.028 550.459 464.946Z",
 ];
 
-const RIGHT_DIVIDER_PATHS = [
-  "M574.235 215.268C585.244 210.864 614.923 201.529 645.571 199.415C676.218 197.301 702.375 198.534 711.622 199.415",
-  "M637.646 302.459C642.049 301.138 655.348 297.703 673.314 294.533C691.28 291.362 707.22 290.57 712.944 290.57",
-  "M708.981 406.821C711.183 407.702 717.436 408.935 724.834 406.821C732.231 404.707 735.842 403.298 736.723 402.858",
-];
-
 const SECTIONS: SectionDef[] = [
   {
     id: "leg-left-17",
@@ -78,6 +73,8 @@ const SECTIONS: SectionDef[] = [
     id: "leg-left-16",
     number: 16,
     d: "M 218.750 201.250 L 263.000 197.000 L 320.750 195.000 L 360.000 199.000 L 370.750 201.750 L 320.750 289.250 L 298.500 289.250 L 266.250 298.250 L 259.000 265.250 L 252.750 249.000 Z",
+    hitboxD:
+      "M 200.000 195.000 L 380.000 195.000 L 380.000 305.000 L 200.000 305.000 Z",
     cx: 297.99,
     cy: 244.09,
   },
@@ -85,6 +82,8 @@ const SECTIONS: SectionDef[] = [
     id: "leg-left-15",
     number: 15,
     d: "M 266.500 302.250 L 278.250 297.000 L 294.500 293.000 L 307.250 291.500 L 320.000 293.000 L 321.750 322.250 L 320.000 355.500 L 311.000 378.500 L 295.000 407.000 L 269.500 406.250 L 269.500 348.000 Z",
+    hitboxD:
+      "M 245.000 290.000 L 345.000 290.000 L 345.000 415.000 L 245.000 415.000 Z",
     cx: 293.37,
     cy: 345.73,
   },
@@ -92,6 +91,8 @@ const SECTIONS: SectionDef[] = [
     id: "leg-left-14",
     number: 14,
     d: "M 229.250 483.750 L 260.750 451.250 L 269.250 411.250 L 294.500 411.250 L 294.750 463.500 L 303.250 480.750 L 299.000 483.750 L 286.250 480.750 L 271.000 496.000 L 253.500 495.000 L 235.250 488.000 Z",
+    hitboxD:
+      "M 205.000 405.000 L 325.000 405.000 L 325.000 525.000 L 205.000 525.000 Z",
     cx: 277.97,
     cy: 447.37,
   },
@@ -106,6 +107,8 @@ const SECTIONS: SectionDef[] = [
     id: "leg-right-16",
     number: 16,
     d: "M 575.250 216.250 L 605.000 207.000 L 639.500 201.000 L 673.250 199.500 L 710.750 200.750 L 705.250 225.750 L 703.750 256.000 L 706.000 274.250 L 711.250 289.000 L 679.750 292.000 L 636.250 301.000 L 608.000 261.250 L 583.000 230.750 Z",
+    hitboxD:
+      "M 560.000 195.000 L 730.000 195.000 L 730.000 305.000 L 560.000 305.000 Z",
     cx: 659.436,
     cy: 250.704,
   },
@@ -113,6 +116,8 @@ const SECTIONS: SectionDef[] = [
     id: "leg-right-15",
     number: 15,
     d: "M 639.000 303.500 L 677.000 295.000 L 713.000 292.000 L 728.250 317.500 L 738.750 326.750 L 742.000 333.000 L 738.250 350.250 L 735.500 402.000 L 719.000 406.750 L 709.250 405.500 L 706.000 383.250 L 671.250 346.750 Z",
+    hitboxD:
+      "M 620.000 290.000 L 760.000 290.000 L 760.000 415.000 L 620.000 415.000 Z",
     cx: 710.256,
     cy: 352.343,
   },
@@ -120,6 +125,8 @@ const SECTIONS: SectionDef[] = [
     id: "leg-right-14",
     number: 14,
     d: "M 706.750 481.000 L 711.750 443.500 L 709.500 409.250 L 721.750 409.000 L 735.000 405.000 L 736.250 427.000 L 748.750 461.500 L 747.750 472.000 L 740.000 483.500 L 738.500 491.250 L 719.250 491.000 L 709.250 485.750 Z",
+    hitboxD:
+      "M 685.000 400.000 L 770.000 400.000 L 770.000 500.000 L 685.000 500.000 Z",
     cx: 728.736,
     cy: 452.444,
   },
@@ -137,19 +144,33 @@ export function CowLegSvg({
   showHitboxes = false,
   ...svgProps
 }: CowLegSvgProps) {
-  const handleSectionClick = (sectionId: LegSectionId, sectionNumber: number) => {
+  const handleSectionClick = (
+    sectionId: LegSectionId,
+    sectionNumber: number,
+  ) => {
     onSectionClick?.({ sectionId, sectionNumber });
   };
 
   return (
     <svg
       {...svgProps}
-      className={cx(styles.root, showHitboxes && styles.showHitboxes, className)}
+      className={cx(
+        styles.root,
+        showHitboxes && styles.showHitboxes,
+        className,
+      )}
       viewBox="0 0 970 524"
       role="img"
       aria-label="Interactive cow leg anatomy"
     >
-      <rect className={styles.labelBadge} x="822.36" y="98.56" width="90.238" height="43.664" rx="3.08" />
+      <rect
+        className={styles.labelBadge}
+        x="822.36"
+        y="98.56"
+        width="90.238"
+        height="43.664"
+        rx="3.08"
+      />
       <text className={styles.labelText} x="867.479" y="120.392">
         A
       </text>
@@ -163,13 +184,26 @@ export function CowLegSvg({
             id={`section-${section.id}`}
             data-section-id={section.id}
             data-section-number={section.number}
-            className={cx(styles.section, isActive && styles.sectionActive, sectionClassNames?.[section.id])}
+            className={cx(
+              styles.section,
+              isActive && styles.sectionActive,
+              sectionClassNames?.[section.id],
+            )}
             onClick={() => handleSectionClick(section.id, section.number)}
           >
-            <path className={styles.hitbox} d={section.d} />
+            <path className={styles.hitbox} d={section.hitboxD ?? section.d} />
             <path className={styles.visual} d={section.d} />
-            <circle className={styles.indicator} cx={section.cx} cy={section.cy} r="13.09" />
-            <text className={cx(styles.indicatorText, styles.indicatorTextSmall)} x={section.cx} y={section.cy + 1}>
+            <circle
+              className={styles.indicator}
+              cx={section.cx}
+              cy={section.cy}
+              r="13.09"
+            />
+            <text
+              className={cx(styles.indicatorText, styles.indicatorTextSmall)}
+              x={section.cx}
+              y={section.cy + 1}
+            >
               {section.number}
             </text>
           </g>
@@ -182,10 +216,6 @@ export function CowLegSvg({
 
       {RIGHT_OUTLINE_PATHS.map((d) => (
         <path key={d} className={styles.outline} d={d} />
-      ))}
-
-      {RIGHT_DIVIDER_PATHS.map((d) => (
-        <path key={d} className={styles.divider} d={d} />
       ))}
     </svg>
   );
