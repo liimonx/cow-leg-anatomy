@@ -106,13 +106,13 @@
   pointer-events: none;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+  transform-origin: center;
+  transform-box: fill-box;
 }
 
 .section:hover .indicator {
   fill: var(--hover-indicator-fill, rgba(129, 140, 248, 1));
   transform: scale(1.1);
-  transform-box: fill-box;
-  transform-origin: center;
 }
 
 :global([data-theme="light"]) .section:hover .indicator {
@@ -122,8 +122,6 @@
 .sectionActive .indicator {
   fill: var(--active-indicator-fill, rgba(79, 70, 229, 1));
   transform: scale(1.15);
-  transform-box: fill-box;
-  transform-origin: center;
   filter: drop-shadow(
     0 0 12px var(--active-indicator-shadow, rgba(99, 102, 241, 0.8))
   );

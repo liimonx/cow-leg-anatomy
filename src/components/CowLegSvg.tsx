@@ -210,12 +210,22 @@ export function CowLegSvg({
         );
       })}
 
-      {LEFT_OUTLINE_PATHS.map((d) => (
-        <path key={d} className={styles.outline} d={d} />
+      {LEFT_OUTLINE_PATHS.map((d, index) => (
+        <path
+          key={d}
+          className={styles.outline}
+          d={d}
+          strokeDasharray={index === 0 ? "451px 221px" : ""}
+        />
       ))}
 
-      {RIGHT_OUTLINE_PATHS.map((d) => (
-        <path key={d} className={styles.outline} d={d} />
+      {RIGHT_OUTLINE_PATHS.map((d, index) => (
+        <path
+          key={d}
+          className={styles.outline}
+          d={d}
+          strokeDasharray={index === 0 ? "255px 216px" : ""}
+        />
       ))}
     </svg>
   );
