@@ -89,7 +89,6 @@
   stroke-linejoin: round;
   stroke-width: 2.2;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(4px);
 }
 
 .section:hover .visual {
@@ -196,7 +195,6 @@
   stroke: var(--badge-border, rgba(255, 255, 255, 0.1));
   stroke-width: 2;
   pointer-events: none;
-  backdrop-filter: blur(8px);
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
 }
 
